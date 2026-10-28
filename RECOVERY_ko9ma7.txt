@@ -1,0 +1,20 @@
+PromptFlow Studio GitHub "fetch first" 오류 복구
+===============================================
+원인: 원격 main에 로컬에 없는 커밋이 있어 git push 거부됨.
+
+1. 기존 promptflow-studio 프로젝트 폴더의 .git 폴더를 삭제하지 마세요.
+2. ZIP에서 아래 4개 파일을 기존 폴더에 덮어쓰세요.
+   - github-bootstrap.cmd
+   - github-update.cmd
+   - git-safe-sync.cmd
+   - github-repair-push.cmd
+3. 기존 로컬 커밋이 있으면 github-repair-push.cmd를 더블클릭하세요.
+   복사한 수정 CMD 등을 커밋하고 원격 내용을 안전하게 fetch / merge합니다.
+   로컬 커밋이 아직 없다면 github-bootstrap.cmd를 실행하세요.
+4. 로컬과 GitHub가 별도의 첫 커밋으로 시작하여 원격에 1커밋만 있으면
+   [Y/N] 질문이 표시됩니다. 로컬 v2 파일을 우선하도록 합치려면 Y를 입력하세요.
+5. 성공 후 GitHub Actions, Pages, 웹사이트 URL을 확인하세요.
+
+무조건 덮어쓰기나 --force push를 사용하지 않습니다.
+GitHub: https://github.com/ko9ma7/promptflow-studio
+예상 사이트 주소: https://ko9ma7.github.io/promptflow-studio/

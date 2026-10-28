@@ -1,0 +1,21 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert'),path=require('path');
+const js=fs.readFileSync(path.join(__dirname,'assets/app.js'),'utf8').split("document.addEventListener('click',e=>")[0];
+const ctx={localStorage:{getItem(){return null},setItem(){}},console,Date,Math};vm.createContext(ctx);vm.runInContext(js,ctx);
+function run(s){return vm.runInContext(s,ctx)}
+assert.equal(run('STEPS.length'),10);
+assert.equal(run('GUIDE_RECIPES.length'),17);
+assert.equal(run('GUIDE_RECIPES.filter(x=>x.section==="basic").length'),8);
+assert.equal(run('GUIDE_RECIPES.filter(x=>x.section==="advanced").length'),4);
+assert.equal(run('GUIDE_RECIPES.filter(x=>x.section==="motion").length'),5);
+assert(run('guideScreen()').includes('① 1단계 마스터 프롬프트 복사'));
+assert(run('guideScreen()').includes('영상의 3단계'));
+const a=run("makeProject('presentation','HTML 인터랙티브 발표')");a.aiProvider='ChatGPT';
+assert(run('buildLessonPrompt('+JSON.stringify(a)+', "base")').startsWith('@Sites'));
+a.aiProvider='Claude';assert(!run('buildLessonPrompt('+JSON.stringify(a)+', "base")').startsWith('@Sites'));
+a.guide.target='report';const reportPrompt=run('buildLessonPrompt('+JSON.stringify(a)+',"base")');assert(reportPrompt.includes('제작 화면으로 불러오면'));
+a.guide.target='ppt';assert(run('buildLessonPrompt('+JSON.stringify(a)+',"base")').includes('편집 가능한 PowerPoint'));
+assert(run('buildLessonWorkbook('+JSON.stringify(a)+')').includes('## 2단계 · 추가 효과'));
+assert(run('buildInitial('+JSON.stringify(a)+')').includes('영상 원본 3단계'));
+assert(run('buildLessonPrompt('+JSON.stringify(a)+',"refine")').includes('수정'));
+assert(run('buildLessonPrompt('+JSON.stringify(a)+',"motion")').includes('모션그래픽'));
+console.log('PASS: 10 steps, 17 recipes, HTML/PPT modes, AI prefix, basic/refine/motion/workbook/full prompt');
