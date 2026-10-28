@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#151f35" />
+  <meta name="description" content="만들고 싶은 것을 선택하고, 단계별 질문과 페이지 설계, 품질 프리셋으로 AI 프롬프트를 만들고 수정하세요. GitHub Pages용 로컬 우선 프롬프트 워크플로 스튜디오." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="PromptFlow Studio" />
+  <meta property="og:title" content="PromptFlow Studio · AI에게 더 잘 요청하는 작업실" />
+  <meta property="og:description" content="유형 선택 → 페이지 구성 → 단계별 질문 → AI 응답 검토 → 수정 프롬프트. 코드 없이 브라우저에서 작업합니다." />
+  <meta property="og:image" content="assets/og-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="site.webmanifest" />
+  <title>PromptFlow Studio | AI 프롬프트 설계 작업실</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#home" id="brandHome" aria-label="PromptFlow 홈"><span class="brand-icon">✦</span><span><strong>promptflow</strong><small>AI WORKFLOW STUDIO</small></span></a>
+      <div class="sidebar-label">현재 프로젝트</div>
+      <button id="sidebarProject" class="project-chip"><span class="project-letter">P</span><span class="project-chip-label"><b id="sideProjectName">새 프로젝트</b><small>로컬 자동 저장</small></span><span>⌄</span></button>
+      <div class="sidebar-label label-space">WORKFLOW <span id="progressLabel">0%</span></div>
+      <div class="progress-track"><div id="progressBar"></div></div>
+      <nav class="steps-nav" id="stepsNav" aria-label="제작 워크플로"></nav>
+      <div class="sidebar-bottom">
+        <div class="note"><span>✧</span><div><b>직접 제작하지 않습니다</b><p>외부 AI에 전달할 요청과 수정 프롬프트를 설계하는 도구입니다.</p></div></div>
+        <button class="sidebar-help" data-action="help">ⓘ 사용법 · 단축 가이드</button>
+      </div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar">
+        <div class="mobile-heading"><button class="icon-button mobile-menu" data-action="mobileMenu" aria-label="메뉴 열기">☰</button><span>promptflow</span></div>
+        <div class="breadcrumbs"><span>WORKSPACE</span><span class="crumb-divider">/</span><span id="crumb">시작하기</span></div>
+        <div class="top-actions"><span class="saved-state" id="savedState"><span class="status-dot"></span> 자동 저장</span><button class="btn btn-quiet hide-small" data-action="import">불러오기</button><button class="btn btn-outline" data-action="export">↧ 프로젝트 백업</button></div>
+      </header>
+      <div class="workspace">
+        <section class="work-center" id="mainContent" aria-live="polite"></section>
+        <aside class="preview-pane" id="previewPane">
+          <div class="preview-header"><div><span class="eyebrow">LIVE PROMPT</span><h3>프롬프트 미리보기</h3></div><span class="live-tag"><span class="live-dot"></span> LIVE</span></div>
+          <div class="preview-switch"><button class="on" data-preview="initial">초기 요청</button><button data-preview="revision">수정 요청</button><button data-preview="checklist">검수 항목</button></div>
+          <div class="preview-scroll"><div class="preview-score" id="previewScore"></div><pre class="prompt-code" id="promptCode"></pre></div>
+          <div class="preview-actions"><button class="btn btn-primary" data-action="copyPreview">▣ 프롬프트 복사</button><button class="btn btn-outline" data-action="downloadPreview">↓ .md 저장</button></div>
+        </aside>
+      </div>
+      <footer class="work-footer"><button class="btn btn-quiet" data-action="back">← 이전 단계</button><span id="stepCounter">STEP 01 / 09</span><button class="btn btn-primary" data-action="next">다음 단계 →</button></footer>
+    </main>
+  </div>
+  <div id="toaster" class="toaster" role="status" aria-live="polite"></div>
+  <div id="modalRoot"></div>
+  <input id="importFile" type="file" accept=".json,application/json" hidden />
+  <input id="attachFile" type="file" accept=".txt,.md,.json,.csv,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.html,.css,.js,.ts,.tsx,.jsx,.png,.jpg,.jpeg,.webp,.svg,.zip" multiple hidden />
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+</body>
+</html>
