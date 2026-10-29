@@ -1,0 +1,18 @@
+PROMPTFLOW STUDIO v3.0 - FIRST USE
+==================================
+
+1) ZIP 압축 해제: index.html을 열고 버튼 선택에 따라 우측 프롬프트가 바뀌는지 먼저 확인하세요.
+2) 기존 ko9ma7/promptflow-studio에 업로드하려면 기존 로컬 Git 저장소 폴더(.git 포함)를 유지합니다.
+3) v3 파일을 기존 폴더에 복사/덮어쓰기 합니다. .git 폴더는 삭제하지 마세요.
+4) 기존 폴더에서 github-update.cmd를 더블클릭합니다. Git과 GitHub CLI(gh)를 설치하고 로그인해야 합니다.
+5) main의 원격 변경사항을 확인하며, 별개 이력이면 사용자 동의 후 병합을 시도합니다. force push는 금지입니다.
+6) GitHub Repository Actions에서 deploy.yml 성공 여부와 최종 URL을 직접 확인합니다.
+
+https://github.com/ko9ma7/promptflow-studio
+https://ko9ma7.github.io/promptflow-studio/
+
+문제가 있을 때: README.md 9~11절 또는 USER_GUIDE.md FAQ 참고.
+
+변경 확인: HTML 슬라이드 -> HTML 보고서 -> PPT 양식 클릭해 우측 프롬프트 문장이 변경되는지 확인하세요.
+
+본 서비스는 프롬프트를 생성하며 외부 AI를 직접 호출하지 않습니다.
